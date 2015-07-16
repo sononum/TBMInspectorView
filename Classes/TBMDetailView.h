@@ -10,9 +10,9 @@
 
 @interface TBMDetailView : NSView
 
-@property (retain, readonly) NSView *detailView;
+@property (strong, readonly) NSView *detailView;
 @property BOOL collapsed;
-@property (retain) id representingObject;
+@property (strong) id representingObject;
 
 - (id)initWithWidth:(CGFloat)width
               label:(NSString *)labelString

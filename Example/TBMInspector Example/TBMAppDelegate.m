@@ -20,7 +20,6 @@
     
     [scrollView setDocumentView:inspector];
     
-    [inspector release];
 }
 
 @end

@@ -16,8 +16,8 @@ CGFloat const TBDetailViewBarHeight = 19.0;
 
 @interface TBMDetailView ()
 
-@property (retain) NSTrackingArea *trackingArea;
-@property (retain, readwrite) NSView *detailView;
+@property (strong) NSTrackingArea *trackingArea;
+@property (strong, readwrite) NSView *detailView;
 @property (unsafe_unretained) NSTextField *label;
 @property (unsafe_unretained) NSButton *showHideButton;
 
@@ -61,7 +61,6 @@ CGFloat const TBDetailViewBarHeight = 19.0;
                                                                                attributes:@{NSFontAttributeName : [NSFont boldSystemFontOfSize:11.0]}];
         
         label.attributedStringValue = attributedString;
-        [attributedString release];
         [label sizeToFit];
         
         NSRect labelFrame = label.frame;
@@ -72,7 +71,6 @@ CGFloat const TBDetailViewBarHeight = 19.0;
         [self addSubview:label];
         
         self.label = label;
-        [label release];
         
         //Create the show/hide button for the bar
         NSButton *showHideButton = [[TBMShowHideButton alloc] init];
@@ -110,7 +108,6 @@ CGFloat const TBDetailViewBarHeight = 19.0;
         [self addSubview:showHideButton];
         
         self.showHideButton = showHideButton;
-        [showHideButton release];
         
         //Calculate the origin of the detailView and apply the right width
         NSRect detailViewFrame = detailView.frame;
@@ -128,15 +125,6 @@ CGFloat const TBDetailViewBarHeight = 19.0;
     return self;
 }
 
-- (void)dealloc {
-    
-    //Release properties
-    self.detailView = nil;
-    self.representingObject = nil;
-    self.trackingArea = nil;
-    
-    [super dealloc];
-}
 
 #pragma mark -
 #pragma mark Drawing
@@ -232,7 +220,6 @@ CGFloat const TBDetailViewBarHeight = 19.0;
     [self addTrackingArea:newTrackingArea];
     
     self.trackingArea = newTrackingArea;
-    [newTrackingArea release];
 }
 
 - (void)mouseEntered:(NSEvent *)theEvent {
@@ -307,7 +294,6 @@ CGFloat const TBDetailViewBarHeight = 19.0;
                                                               userInfo:userInfo];
         }
         
-        [userInfo release];
         
         [(TBMInspectorView *)self.superview updateDetailViewPositions];
     }
@@ -328,10 +314,8 @@ CGFloat const TBDetailViewBarHeight = 19.0;
     
     NSAttributedString *attributedString = [[NSAttributedString alloc] initWithString:stringValue
                                                                            attributes:attributes];
-    [attributes release];
-    [paragraph release];
     
-    return [attributedString autorelease];
+    return attributedString;
 }
 
 @end

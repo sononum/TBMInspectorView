@@ -73,7 +73,6 @@ NSString *TBMInspectorViewDetailViewDidCollapseNotification = @"TBMInspectorView
     //Unregister the delegate
     self.delegate = nil;
     
-    [super dealloc];
 }
 
 - (BOOL)isFlipped {
@@ -112,7 +111,7 @@ NSString *TBMInspectorViewDetailViewDidCollapseNotification = @"TBMInspectorView
     //Respotition all view containers
     [self updateDetailViewPositions];
     
-    return [viewContainer autorelease];
+    return viewContainer;
 }
 
 - (void)removeDetailView:(TBMDetailView *)detailView {
